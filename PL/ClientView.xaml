@@ -1,0 +1,219 @@
+﻿<Window x:Class="PL.ClientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialdesignin="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="ClientView" Height="600" Width="1200"
+        Closing="Window_Closing"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+        Icon="/DroneIcon.png" 
+     Background="{StaticResource clientBackground}" 
+
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    
+    <Grid Name="MainGrid">
+        <Grid.CommandBindings>
+            <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+
+        </Grid.CommandBindings>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="557*"/>
+            <ColumnDefinition Width="243*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="AddDroneGrid" Margin="0,0,10,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="395*"/>
+                <ColumnDefinition Width="166*"/>
+                <ColumnDefinition Width="229*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+            <Label Name="TitelClientLabel" Content="Add Client" FontSize="15" Foreground="#FF1432F0" Background="Transparent"/>
+            <TextBox x:Name="idTextBox"   IsEnabled="{Binding ElementName=OkButton, Path=IsVisible}"  Margin="83,3,0,21"   Width="157" MaxLength="9"   HorizontalAlignment="Left" BorderBrush="#FF0E1015" Grid.Row="1" LostFocus="idTextBox_LostFocus" Validation.Error="Error"  >
+                <TextBox.Text>
+                    <Binding Path="Id" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            <local:InputERRORValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label x:Name="IdLabel" Content="ID:"  HorizontalAlignment="Left" FontWeight="Bold" FontStyle="Normal" Margin="23,22,0,16" Grid.Row="1"/>
+            <Label  Name="nameLabel" Content="Name:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Width="72" HorizontalAlignment="Left" FontWeight="Bold" Margin="15,29,0,0"/>
+            <Label Name="EorWDegrre" IsEnabled="True" Content="{Binding Path=Location.Longitude, Mode=OneWay,Converter={StaticResource EorW}}" HorizontalAlignment="Left"  Margin="284,2,0,0" VerticalAlignment="Top" FontSize="20" Height="30" Width="42" Background="{x:Null}" Foreground="#DD000000" Grid.Row="5"/>
+            <Label Name="NorSDegrre" IsEnabled="True" Content="{Binding Path=Location.Latitude, Mode=OneWay,Converter={StaticResource SorN}}" HorizontalAlignment="Center"  Margin="0,13,0,0" VerticalAlignment="Top" Height="30" FontSize="20" Width="42" Background="{x:Null}" Foreground="#DD000000" Grid.Row="4"/>
+            <Label Name="PhoneLabel"  Content="Phone:" Grid.Row="3" VerticalAlignment="Top" Width="51" HorizontalAlignment="Left" FontWeight="Bold" Margin="17,23,0,0"/>
+            <TextBox Name="endphoneTextBox" MaxLength="7" Validation.Error="Error"    HorizontalAlignment="Left" Margin="181,31,0,0" Grid.Row="3" VerticalAlignment="Top" Width="129"   >
+                <TextBox.Text>
+                    <Binding Path="EndPhone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            <local:InputERRORValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+            <Button  Name="OkButton"  Command="New"    Grid.Row="7"   VerticalAlignment="Center" Height="50" Click="OkButton_Click" Margin="50,0,421,0" RenderTransformOrigin="0.528,1.35"  >
+                <Button.Background>
+                    <ImageBrush ImageSource="/ok.jpg"/>
+                </Button.Background>
+
+            </Button>
+            <Button x:Name="updateButton" Command="" Visibility="{Binding ElementName=AddPAckegeButton, Path=Visibility}" Content="Update" Margin="71,11,445,15" Click="updateButton_Click" Grid.Row="7" />
+            <Label Name="LonditudeLabel"  Content="Londitude:" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Top" Width="74" FontWeight="Bold" Margin="6,11,0,0" />
+            <TextBox  Name="longditue" Validation.Error="Error" Width="190"  HorizontalAlignment="Left" Height="29" Margin="88,4,0,0" Grid.Row="5" VerticalAlignment="Top" MouseDoubleClick="letitudeTextBox_MouseDoubleClick"  >
+                <TextBox.Text>
+                    <Binding Path="Location.Longitude" Mode="TwoWay" UpdateSourceTrigger="LostFocus" Converter="{StaticResource degrre}" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            <local:InputERRORWithPointValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+
+
+
+            <Label Name="AllFieldsArerequiredLabel" Content="All fields are required!"  HorizontalAlignment="Left" Margin="90,29,0,0" Grid.Row="7" VerticalAlignment="Top" Height="34" Grid.RowSpan="2" Width="145" Foreground="#FFDC3434" Visibility="Collapsed">
+            </Label>
+            <Button  HorizontalAlignment="Left" Height="58" Margin="286,0,0,0" Grid.Row="7" VerticalAlignment="Center" Width="67" Click="ExitButton_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/return.png" />
+                </Button.Background>
+            </Button>
+
+            <TextBox  Validation.Error="Error" Name="nameTextBox"  HorizontalAlignment="Left" Margin="81,29,0,0" Grid.Row="2" VerticalAlignment="Top" Width="147" >
+                <TextBox.Text>
+                    <Binding Path="Name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Label Name="latitudelabel" Content="Latitude:" HorizontalAlignment="Left" Margin="11,19,0,0" Grid.Row="4" VerticalAlignment="Top" Width="82" FontWeight="Bold"/>
+            <TextBox Name="letitudeTextBox"  Validation.Error="Error"   HorizontalAlignment="Left" Margin="81,11,0,0" Grid.Row="4" VerticalAlignment="Top" Width="193" Height="29" MouseDoubleClick="letitudeTextBox_MouseDoubleClick"  >
+                <TextBox.Text>
+                    <Binding Path="Location.Latitude" Mode="TwoWay" UpdateSourceTrigger="LostFocus" Converter="{StaticResource degrre}" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            <local:InputERRORWithPointValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <ListView Visibility="Visible" ItemsSource="{Binding FromClient}" x:Name="ListPackegeFromClient" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,47,3,2" Grid.RowSpan="4" BorderBrush="Black" Background="#FFDC0E0E" SelectionChanged="ListPackegeFromClient_SelectionChanged">
+                <ListView.View>
+                    <GridView x:Name="ListviewGridFromClientsList"  AllowsColumnReorder="True" ColumnHeaderToolTip="Employee">
+
+                        <GridViewColumn  DisplayMemberBinding="{Binding SerialNum}" x:Name="SerialNumPac" >
+                            <HeaderedContentControl x:Name="SerialNumS"  MouseLeftButtonDown="HeaderedContentControl_MouseDoubleClick" Foreground="White"   >
+                                <TextBox Text="Serial Number" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding WeightCatgory}" x:Name="WeightCatgoryPAc"  >
+                            <HeaderedContentControl Foreground="White" x:Name="WeightCatgoryS" MouseLeftButtonDown="HeaderedContentControl_MouseDoubleClick"    >
+                                <TextBox Text="Weight Catgory" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Priority}" x:Name="PriorityPac"  >
+                            <HeaderedContentControl Foreground="White" x:Name="PriorityS" HorizontalAlignment="Left" MouseLeftButtonDown="HeaderedContentControl_MouseDoubleClick"  >
+                                <TextBox Text="Priority" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding PackageStatus}" x:Name="PackageStatusPac" >
+                            <HeaderedContentControl Foreground="White" x:Name="PackageStatusS" HorizontalAlignment="Left" MouseLeftButtonDown="HeaderedContentControl_MouseDoubleClick"   >
+                                <TextBox Text="Package Status" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Client2}" x:Name="Client2Pac" >
+                            <HeaderedContentControl Foreground="White" x:Name="Client2S" HorizontalAlignment="Left" MouseLeftButtonDown="HeaderedContentControl_MouseDoubleClick"   >
+                                <TextBox Text="To Client " IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Visibility="{Binding ElementName=ListPackegeFromClient, Path=Visibility }" Name="SendListlabel" Content="Packege Send:" Grid.Column="1" HorizontalAlignment="Left" Margin="30,21,0,0" VerticalAlignment="Top"/>
+            <ListView  Visibility="{Binding ElementName=ListPackegeFromClient, Path=Visibility }" x:Name="ListPackegeToClient" ItemsSource="{Binding ToClient}" Grid.Row="4" Grid.ColumnSpan="2" Margin="4,45,-1,4" Grid.RowSpan="4" BorderBrush="Black" Background="#FFDC0E0E" Grid.Column="1" SelectionChanged="ListPackegeToClient_SelectionChanged">
+                <ListView.View>
+                    <GridView x:Name="ListviewGridToClientsList"  AllowsColumnReorder="True" ColumnHeaderToolTip="Employee">
+
+                        <GridViewColumn  DisplayMemberBinding="{Binding SerialNum}" x:Name="SerialNumberGet" >
+                            <HeaderedContentControl Foreground="White" x:Name="SerialNumP" MouseDoubleClick="HeaderedContentControl_MouseDoubleClick"   >
+                                <TextBox Text="Serial Number" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding WeightCatgory}" x:Name="WeightCatgoryGet"  >
+                            <HeaderedContentControl Foreground="White" x:Name="WeightCatgoryP" MouseDoubleClick="HeaderedContentControl_MouseDoubleClick"    >
+                                <TextBox Text="Weight Catgory" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Priority}" x:Name="PriorityGet"  >
+                            <HeaderedContentControl  Foreground="White" x:Name="PriorityP" MouseDoubleClick="HeaderedContentControl_MouseDoubleClick" HorizontalAlignment="Left"  >
+                                <TextBox Text="Priority" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding PackageStatus}" x:Name="PackageStatusGet" >
+                            <HeaderedContentControl Foreground="White" x:Name="PackageStatusP" MouseDoubleClick="HeaderedContentControl_MouseDoubleClick" HorizontalAlignment="Left"   >
+                                <TextBox Text="Package Status" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding Client2}" x:Name="Client2Get" >
+                            <HeaderedContentControl Foreground="White" x:Name="Client2P" MouseDoubleClick="HeaderedContentControl_MouseDoubleClick" HorizontalAlignment="Left"   >
+                                <TextBox Text="To Client " IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+                            </HeaderedContentControl>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label  Visibility="{Binding ElementName=ListPackegeFromClient, Path=Visibility }" Name="ToClientLabel" Content="Packege to client:" HorizontalAlignment="Left" Margin="26,27,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1"/>
+            <Button  Visibility="{Binding ElementName=ListPackegeFromClient, Path=Visibility }" x:Name="AddPAckegeButton"  HorizontalAlignment="Left" Margin="96,9,0,0" VerticalAlignment="Top"   Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+  ToolTip="MaterialDesignFloatingActionMiniDarkButton"   Height="35" Grid.Column="2" Click="AddPAckegeButton_Click">
+                <materialdesignin:PackIcon Kind="Add" />
+            </Button>
+            <ComboBox Name="StartPhoneCmb" HorizontalAlignment="Left" Text="{Binding Path=StartPhone}"  Validation.Error="Error" Height="35" Margin="75,20,0,0" Grid.Row="3" VerticalAlignment="Top" Width="87">
+                <ComboBoxItem Content="054"/>
+                <ComboBoxItem Content="052"/>
+                <ComboBoxItem Content="053"/>
+                <ComboBoxItem Content="059"/>
+                <ComboBoxItem Content="050"/>
+
+                <ComboBox.SelectedItem>
+                    <Binding Path="StartPhone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules >
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Button x:Name="Delete" Visibility="{Binding ElementName=Delete, Path=Visibility}" Margin="448,13,45,13" Grid.Row="7" Content="Delete" Click="Delete_Click" />
+        </Grid>
+    </Grid>
+
+</Window>

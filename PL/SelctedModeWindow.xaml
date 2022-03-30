@@ -1,0 +1,40 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="PL.SelctedModeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Icon="/DroneIcon.png"  ResizeMode="NoResize"
+        Closing="Window_Closing"
+        Title="SelctedModeWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid Name="EnterAsClientGrid" Visibility="Collapsed">
+            <ComboBox Name="ChoseClientCmb" Text=""   HorizontalAlignment="Left" Margin="244,0,0,0" VerticalAlignment="Center" Width="232" Height="44" PreviewKeyDown="ChoseClientCmb_PreviewKeyDown"/>
+            <Label Name="AddNewClient" Content="Add new client?" FontSize="25" HorizontalAlignment="Left" Margin="266,259,0,0" VerticalAlignment="Top" Width="194" MouseLeftButtonUp="AddNewClient_MouseLeftButtonUp"/>
+            <Button x:Name="ClientByNumberMode"  HorizontalAlignment="Left" Margin="502,208,0,0" VerticalAlignment="Top" Click="ClientByNumberMode_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/ok-icon.jpg" />
+
+                </Button.Background>
+            </Button>
+
+
+        </Grid>
+        <Button x:Name="MengerButton" HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="101" Width="110" Click="MengerButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Manager-icon.png" />
+
+            </Button.Background>
+        </Button>
+        <Button x:Name="ClientButton" HorizontalAlignment="Left" Margin="163,44,0,0" VerticalAlignment="Top" Height="97" Width="104" Click="ClientButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/clienticon.png" />
+
+            </Button.Background>
+        </Button>
+        <Button x:Name="ExitButton" Content="{materialDesign:PackIcon Kind=ExitToApp, Size=25}"  HorizontalAlignment="Left" Margin="722,19,0,0" VerticalAlignment="Top" Height="41" Width="58" Background="#FF23ABED" Click="ExitButton_Click"/>
+
+    </Grid>
+</Window>

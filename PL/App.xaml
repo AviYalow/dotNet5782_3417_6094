@@ -1,0 +1,66 @@
+﻿<Application x:Class="PL.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PL"
+             xmlns:materialdesignin="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="MainWindow.xaml"   
+             >
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <local:DegrreConverter x:Key="degrre"/>
+          
+            <local:LongPointEorWConverter x:Key="EorW"/>
+            <local:LutitudePointSorNConverter x:Key="SorN"/>
+            <ImageBrush ImageSource="/clientview.png" x:Key="clientBackground"/>
+            <ImageBrush ImageSource="/clientlist1.png" x:Key="clientListBackground"/>
+            <ImageBrush x:Key="Borde" ImageSource="/normal.jpg" />
+            <ImageBrush x:Key="Drone" ImageSource="/Velodyne_Drone_920.jpg" />
+            <Storyboard x:Key="Listening">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.3" 
+                         Duration="0:0:0.300" 
+                         AutoReverse="True" 
+                         RepeatBehavior="Forever" />
+            </Storyboard>
+            <ImageBrush x:Key="Base" ImageSource="/base drone.jpg" />
+            <ImageBrush x:Key="Packege" ImageSource="/packege.jpg" />
+            <ImageBrush x:Key="client" ImageSource="/relation-client-.png" />
+
+            <LinearGradientBrush x:Name="LinearGradientBrush1" x:Key="LinearGradientBrush1">
+                <GradientStop Color="Blue" Offset="0"/>
+                <GradientStop Color="Yellow" Offset="0.4"/>
+                <GradientStop Color="Red" Offset="1.4"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Name="LinearGradientBrush2" x:Key="LinearGradientBrush2">
+                <GradientStop Color="#FFFF4900" Offset="0"/>
+                <GradientStop Color="#FF00DFFF" Offset="0.4"/>
+                <GradientStop Color="Red" Offset="1.4"/>
+            </LinearGradientBrush>
+            <Grid x:Name="outPutGrid" x:Key="outPutGrid">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+
+            <ResourceDictionary.MergedDictionaries>
+                <materialdesignin:BundledTheme BaseTheme="Light" PrimaryColor="BlueGrey" SecondaryColor="Lime"  />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml"/>
+                <!-- throw in some extra colour for our floating action button -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/MaterialDesignColor.Green.Named.Primary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,204 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="PL.DroneWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+         xmlns:materialdesignin="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+         Closing="Window_Closing"
+        Title="DroneWindow" Height="500" Width="850"
+         
+   Icon="/DroneIcon.png"  ResizeMode="NoResize"  
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+    
+     FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources >
+        <ImageBrush x:Key="Blockchains" ImageSource="/droneDelivery.jpg" />
+        <ImageBrush x:Key="Prime_Air" ImageSource="/5-challenges-that-the-drone-1.jpg" />
+        <ImageBrush x:Key="Quadcopter" ImageSource="/Amazon-Drone.jpg" />
+        <ImageBrush x:Key="Cargo" ImageSource="/Drone-Delivery.jpg" />
+        <ImageBrush x:Key="BigContainers" ImageSource="/Drone-Delivery.png" />
+        <ImageBrush x:Key="FlyingSky" ImageSource="/drone-delivery-concept-model-package-box-blue-background-d-design-illustration-hd-image-concept-delivery-quadcopter-157633516.jpg" />
+    </Window.Resources>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="null">
+                    <Setter Property="Background" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="Blockchains">
+                    <Setter Property="Background" Value="{DynamicResource Blockchains}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="Prime_Air">
+                    <Setter Property="Background" Value="{DynamicResource Prime_Air}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="Quadcopter">
+                    <Setter Property="Background" Value="{DynamicResource Quadcopter}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="Cargo">
+                    <Setter Property="Background" Value="{DynamicResource Cargo}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="BigContainers">
+                    <Setter Property="Background" Value="{DynamicResource BigContainers}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ModelComboBox, Path=SelectedItem}" Value="FlyingSky">
+                    <Setter Property="Background" Value="{DynamicResource FlyingSky}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+
+
+    <Grid Name="MainGrid">
+        <Grid.CommandBindings>
+            <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+        </Grid.CommandBindings>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="557*"/>
+            <ColumnDefinition Width="243*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="AddDroneGrid" Margin="0,0,10,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+
+            </Grid.RowDefinitions>
+            <Label Name="TitelDroneLabel" Content="Add Drone" FontSize="15" Foreground="#FF1432F0" Background="Transparent"/>
+            <TextBox x:Name="SirialNumberTextBox" Validation.Error="Error"  Margin="126,44,0,14"  TextWrapping="Wrap" Width="130" HorizontalAlignment="Left" Grid.RowSpan="2" BorderBrush="#FF0E1015"   >
+                <TextBox.Text>
+                    <Binding Path="SerialNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            <local:MinusValidationRule ValidatesOnTargetUpdated="True"/>
+                            <local:InputERRORValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding> 
+                </TextBox.Text>
+            </TextBox>
+            <Label x:Name="SirialNumberLabel" Content="Sirial Number:"  HorizontalAlignment="Left" FontWeight="Bold" FontStyle="Normal" Margin="2,4,0,45" Grid.RowSpan="2" Grid.Row="1"/>
+            <Label  Name="ModelLabel" Content="Model:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="72" HorizontalAlignment="Left" FontWeight="Bold" Margin="4,44,0,0" Grid.RowSpan="2"/>
+
+            <Label Name="WeightCategoryLabel"  Content="Weight Category:" Grid.Row="2" VerticalAlignment="Top" Width="105" HorizontalAlignment="Left" FontWeight="Bold" Margin="0,44,0,0" Grid.RowSpan="2"/>
+            <ComboBox Name="WeightChoseCombo"  Validation.Error="Error"  Text="{Binding Path= WeightCategory }"  IsEnabled="{Binding ElementName=SirialNumberTextBox, Path=IsEnabled}"  HorizontalAlignment="Left" Margin="126,39,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Width="130" IsEditable="True" IsReadOnly="True" IsDropDownOpen="False" IsSynchronizedWithCurrentItem="False" Grid.RowSpan="2" >
+                <ComboBox.SelectedItem>
+                    <Binding Path="WeightCategory" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                        <Binding.ValidationRules >
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>  
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Label Name="ErrorMassegeLabel"  Content="Your input Worng!" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="118" Visibility="Collapsed" Foreground="#FFF13C3C" Margin="132,19,0,0"     />
+            <Button  Name="OkButton" Command="New" Visibility="{Binding ElementName=BaseChosingCombo, Path=Visibility}"    Grid.Row="7"   VerticalAlignment="Center" Height="50" Click="OkButton_Click" Margin="50,0,275,0" RenderTransformOrigin="0.528,1.35"  >
+                
+                <Button.Background>
+                    <ImageBrush ImageSource="/ok.jpg"/>
+                </Button.Background>
+            </Button>
+            <Label Name="LocationLabel" Visibility="{Binding ElementName=BaseChosingCombo, Path=Visibility}"  Content="Location:" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Center" Width="74" FontWeight="Bold" Margin="6,0,0,0" Grid.RowSpan="2" />
+            <ComboBox  Name="BaseChosingCombo" Validation.Error="Error"  Width="148" IsEnabled="{Binding ElementName=SirialNumberTextBox ,Path=IsEnabled  }"   HorizontalAlignment="Left" Height="80" Margin="109,42,0,0" Grid.Row="4" VerticalAlignment="Top"  IsEditable="True" SelectionChanged="BaseChosingCombo_SelectionChanged" Grid.RowSpan="3"   >
+                
+                <ComboBox.ItemContainerStyle  >
+                    <Style x:Name="notError" TargetType="ComboBoxItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=InputMissingLocationLabel,Path=IsVisible}" Value="Collapsed">
+                                <Setter x:Name="aaa" Property="Background" Value="{StaticResource LinearGradientBrush1}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=InputMissingLocationLabel,Path=IsVisible}" Value="Visible">
+                                <Setter Property="Background" Value="{StaticResource LinearGradientBrush2}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.ItemContainerStyle>-->
+            </ComboBox>
+            <Label Name="DroneLabel"   VerticalAlignment="Top"       Grid.RowSpan="7" Width="auto" Height="321" Grid.Column="1" Margin="5,14,-5,0" >
+
+                <Grid  >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Package in transfer:" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Butrry status:" FontWeight="Bold"/>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Location:" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Location Name:" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Next Location:" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Distance to next location:" FontWeight="Bold"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Path=PackageInTransfer}"  MouseLeftButtonDown="TextBlock_PreviewMouseRightButtonDownPackegeWindow" />
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Path=ButrryStatus, StringFormat={}{0:f}%}" />
+                    
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Path=Location}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Path=LocationName}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Path=LocationNext}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Path=DistanseToNextLocation}"/>
+                </Grid>
+            </Label>
+
+            <Label Name="AllFieldsArerequiredLabel" Content="All fields are required!"  HorizontalAlignment="Left" Margin="90,29,0,0" Grid.Row="7" VerticalAlignment="Top" Height="34" Grid.RowSpan="2" Width="145" Foreground="#FFDC3434" Visibility="Collapsed">
+            </Label>
+            <Button  HorizontalAlignment="Left" Height="58" Margin="286,0,0,43" Grid.Row="6" VerticalAlignment="Bottom" Width="67" Click="Button_Click" Grid.RowSpan="3">
+                <Button.Background>
+                    <ImageBrush ImageSource="/return.png" />
+                </Button.Background>
+            </Button>
+  
+            <Label Name="InputMissingLocationLabel" Content="Input is missing!" Visibility="Collapsed" HorizontalAlignment="Left" Margin="126,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="126" Foreground="#FFEA1111" Height="26"/>
+            <ComboBox  Name="ModelComboBox" Validation.Error="Error"    HorizontalAlignment="Left" Margin="126,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="130" Grid.RowSpan="2"  BorderBrush="#FFE82525" IsSynchronizedWithCurrentItem="False" SelectionChanged="ModelComboBox_SelectionChanged"     >
+                <ComboBox.SelectedItem>
+                    <Binding Path="Model" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged" >
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"    />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+            <Label Name="Statuslabel" Content="Status:" HorizontalAlignment="Left" Margin="8,41,0,0" Grid.Row="3" VerticalAlignment="Top" Width="82" FontWeight="Bold" Grid.RowSpan="2"/>
+            <ComboBox Name="StatusComb" Validation.Error="Error"   HorizontalAlignment="Left" Margin="125,37,0,0" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="29" SelectionChanged="StatusComb_SelectionChanged" Grid.RowSpan="2" >
+                <ComboBox.SelectedItem>
+                    <Binding Path="DroneStatus" Mode="TwoWay" ValidatesOnDataErrors="True" NotifyOnValidationError="True" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+            </ComboBox>
+           
+            <Button Content="Simulator" Grid.Column="1" HorizontalAlignment="Left" Margin="289,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="93" Click="Simulator_Click" Visibility="{Binding ElementName=DroneLabel, Path=Visibility}">
+
+            </Button>
+            <Button Content="Manual" Grid.Column="1" HorizontalAlignment="Left" Margin="189,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="93" Height="32" Click="Manual_Click" Visibility="{Binding ElementName=DroneLabel, Path=Visibility}"/>
+
+        </Grid>
+    </Grid>
+
+</Window>

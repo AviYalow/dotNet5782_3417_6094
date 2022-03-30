@@ -1,0 +1,160 @@
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="PL.PackageView" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:myns="clr-namespace:BO;assembly=BL"
+  Icon="/DroneIcon.png"  
+        Closing="Window_Closing"
+        
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="PackageView" Height="700" Width="1200" ResizeMode="NoResize">
+    <Window.Resources>
+        <ImageBrush x:Key="Easy" ImageSource="/depositphotos_70711715-stock-photo-quadrocopter-drone-delivering-package.jpg" />
+        <ImageBrush x:Key="Medium" ImageSource="/medium.jpg" />
+        <ImageBrush x:Key="Heavy" ImageSource="/heavy.jpg" />
+    </Window.Resources>
+    <Window.CommandBindings>
+      
+            <CommandBinding Command="New" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed" />
+        
+    </Window.CommandBindings>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=WeightCmb, Path=SelectedItem}" Value="null">
+                    <Setter Property="Background" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=WeightCmb, Path=SelectedItem}" Value="Easy">
+                    <Setter Property="Background" Value="{DynamicResource Easy}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=WeightCmb, Path=SelectedItem}" Value="Medium">
+                    <Setter Property="Background" Value="{DynamicResource Medium}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=WeightCmb, Path=SelectedItem}" Value="Heavy">
+                    <Setter Property="Background" Value="{DynamicResource Heavy}"/>
+                </DataTrigger>
+                
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="AddGrid"  Visibility="Collapsed">
+            <Label Name="TitelPackegeViewLabel" Content="New Packege" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="62" Width="235" FontSize="34"/>
+            <ComboBox Name="SendClientCMB" HorizontalAlignment="Left" Margin="148,92,0,0" VerticalAlignment="Top"  
+            Validation.Error="Error" FontSize="18" materialDesign:HintAssist.Hint="Send Client"  Width="291" Height="59"                  >
+                <ComboBox.SelectedItem>
+                    <Binding  Path="SendClient"  Mode="TwoWay"  UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"    />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+
+            </ComboBox>
+            <ComboBox Name="ResiveClientCMB" Validation.Error="Error" HorizontalAlignment="Left" Margin="148,194,0,0" VerticalAlignment="Top" 
+              FontSize="18" materialDesign:HintAssist.Hint="Resive Client"   Width="291" Height="62" >
+                <ComboBox.SelectedItem>
+                    <Binding Path="RecivedClient"  Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyByItemValidationRule  ValidatesOnTargetUpdated="True"    />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+
+            </ComboBox>
+            <ComboBox Name="PraiyurtyCMB" Validation.Error="Error"  HorizontalAlignment="Left"  Margin="150,294,0,0" VerticalAlignment="Top" 
+              Style="{StaticResource MaterialDesignOutlinedComboBox}" FontSize="18" materialDesign:HintAssist.Hint="Priority" materialDesign:TextFieldAssist.HasClearButton="True" Width="291" Height="57">
+                <ComboBox.SelectedItem>
+                    <Binding Path="Priority" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"    />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+
+            </ComboBox>
+            <ComboBox Name="WeightCmb"  HorizontalAlignment="Left" Margin="152,397,0,0" VerticalAlignment="Top" 
+              Style="{StaticResource MaterialDesignOutlinedComboBox}"  FontSize="18" materialDesign:HintAssist.Hint="Weight Category" materialDesign:TextFieldAssist.HasClearButton="True"  Width="291" Height="58">
+                <ComboBox.SelectedItem>
+                    <Binding      Path="WeightCatgory" Mode="TwoWay"   UpdateSourceTrigger="PropertyChanged"  >
+                        <Binding.ValidationRules>
+                            <local:NotEmptyValidationRule  ValidatesOnTargetUpdated="True"    />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.SelectedItem>
+
+            </ComboBox>
+
+            <Button x:Name="AddButton" Command="New" Click="Button_Click" Content="ADD" HorizontalAlignment="Left" Margin="191,501,0,0" VerticalAlignment="Top" Height="52" Width="107" Visibility="{Binding ElementName=TitelPackegeViewLabel,Path=Visibility}" >
+
+            </Button>
+        </Grid>
+        <Grid x:Name="UpdateGrid" Visibility="Hidden"  >
+
+            <Label x:Name="DataGridPackege"  Margin="589,0,0,0" Visibility="{Binding ElementName=UpDatePackegeTital, Path=Visibility}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+                    <Label Content="Sirial Number:" FontSize="30" Grid.Row="0" Grid.Column="0" />
+                    <Label Content="Drone:" Grid.Column="0" FontSize="30"  Grid.Row="1" MouseLeftButtonDown="SirialNumberDroneLabel_MouseLeftButtonDown"/>
+                    <Label Content="Time of crate:" Grid.Column="0" FontSize="30" Grid.Row="2"/>
+                    <Label Content="Time of conected:" Grid.Column="0" FontSize="30" Grid.Row="3"/>
+                    <Label Content="Time of collected:" Grid.Column="0" FontSize="30" Grid.Row="4"/>
+                    <Label Content="Time of arrive:" Grid.Column="0" FontSize="30" Grid.Row="5"/>
+
+                    <Label Content="{Binding Path=SerialNumber, Mode=TwoWay}" FontSize="30" Grid.Column="1" Grid.Row="0"/>
+
+                    <Label Content="{Binding Path=Create_package , Mode=TwoWay}"  FontSize="30" Grid.Column="1" Grid.Row="2"/>
+                    <Label Content="{Binding Path=PackageAssociation, Mode=TwoWay}" FontSize="30" Grid.Column="1" Grid.Row="3"/>
+                    <Label Content="{Binding Path= CollectPackage, Mode=TwoWay}" FontSize="30" Grid.Column="1" Grid.Row="4"/>
+                    <Label Content="{Binding Path=PackageArrived, Mode=TwoWay}" FontSize="30" Grid.Column="1" Grid.Row="5"/>
+                    <Grid Grid.Column="1" Grid.Row="1" DataContext="{Binding Path=Drone}"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Label Name="SirialNumberDroneLabel"  FontSize="30" Content="{Binding Path=SerialNum}" Grid.Row="0" MouseLeftButtonDown="SirialNumberDroneLabel_MouseLeftButtonDown"/>
+                        <Label Name="ButtryDroneLabel"  FontSize="30" Content="{Binding Path=ButrryStatus}" Grid.Row="1" MouseLeftButtonDown="SirialNumberDroneLabel_MouseLeftButtonDown"/>
+                        <Label Name="LocationDroneLabel"  FontSize="30" Content="{Binding Path=Location}" Grid.Row="2" MouseLeftButtonDown="SirialNumberDroneLabel_MouseLeftButtonDown"/>
+                    </Grid>
+                </Grid>
+            </Label>
+
+
+            <Label Name="UpDatePackegeTital" Content="UpDate Packege" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="62" Width="235" FontSize="34" />
+            <Label Name="Senderclient" Content="{Binding Path=SendClient}" FontSize="18"  HorizontalAlignment="Left" Margin="136,92,0,0" VerticalAlignment="Top" Height="59" Width="316"  />
+            <Label Name="Toclient"  Content="{Binding Path=RecivedClient}" FontSize="18" HorizontalAlignment="Left" Margin="148,194,0,0" VerticalAlignment="Top" Height="60" Width="295" />
+            <Label Name="Priority" Content="{Binding Path=Priority}" FontSize="18" HorizontalAlignment="Left" Margin="148,298,0,0" VerticalAlignment="Top" Height="50" Width="291" />
+            <Label Name="Wieght" Content="{Binding Path=WeightCatgory}" FontSize="18" HorizontalAlignment="Left" Margin="152,397,0,0" VerticalAlignment="Top" Height="48" Width="287" />
+            <Label Name="DronestatuseTitel" Content="Drone Status:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="27,493,0,0" VerticalAlignment="Top" Height="41" Width="100"/>
+            <Label Name="DronestatuseLabel" Content="{Binding}" FontSize="18"  HorizontalAlignment="Left" Margin="170,493,0,0" VerticalAlignment="Top" Height="41" Width="75"/>
+
+
+            <Button x:Name="NextModeButton" HorizontalAlignment="Left" Margin="272,502,0,0" VerticalAlignment="Top" Click="NextModeButton_Click">
+                <materialDesign:PackIcon Kind="SkipNext" FontSize="25" Height="30" Width="34" HorizontalAlignment="Stretch"/>
+            </Button>
+        </Grid>
+        <Label Content="Send Client:" HorizontalAlignment="Left" Margin="25,101,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Resive client:" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top" Height="38" Width="130" FontSize="18" FontWeight="Bold"/>
+        <Label Content="Wieght:" HorizontalAlignment="Left" Margin="24,407,0,0" VerticalAlignment="Top" Height="38" Width="79" FontSize="16" FontWeight="Bold"/>
+        <Label Content="Priority:" HorizontalAlignment="Left" Margin="24,306,0,0" VerticalAlignment="Top" Height="32" Width="78" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="DeleteButton" Content="Delete" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="488,625,0,0" VerticalAlignment="Top" Click="DeleteButton_Click"/>
+
+        <Button x:Name="Exit" Content="{  materialDesign:PackIcon Kind=ExitRun, Size=45}" HorizontalAlignment="Left" Margin="593,596,0,0" VerticalAlignment="Top" Height="54" Width="77" Click="Exit_Click"/>
+    </Grid>
+</Window>

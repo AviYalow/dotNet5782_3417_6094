@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="36914617-3d-delivery-drone-with-a-package-on-white-background.jpg" />
+    <None Remove="5-challenges-that-the-drone-1.jpg" />
+    <None Remove="Amazon-Drone.jpg" />
+    <None Remove="base drone.jpg" />
+    <None Remove="base station list.jfif" />
+    <None Remove="baseImaege.png" />
+    <None Remove="BaseStationView.jpg" />
+    <None Remove="clienticon.png" />
+    <None Remove="clientList.jpg" />
+    <None Remove="clientlist1.png" />
+    <None Remove="clientview.jpg" />
+    <None Remove="clientview.png" />
+    <None Remove="depositphotos_70711715-stock-photo-quadrocopter-drone-delivering-package.jpg" />
+    <None Remove="drone-delivery-concept-model-package-box-blue-background-d-design-illustration-hd-image-concept-delivery-quadcopter-157633516.jpg" />
+    <None Remove="Drone-Delivery.jpg" />
+    <None Remove="Drone-Delivery.png" />
+    <None Remove="droneDelivery.jpg" />
+    <None Remove="DroneIcon.png" />
+    <None Remove="drones.jpg" />
+    <None Remove="easy.jpg" />
+    <None Remove="heavy.jpg" />
+    <None Remove="img_art.png" />
+    <None Remove="louis-michel-lebeau-deli-04.jpg" />
+    <None Remove="Manager-icon.png" />
+    <None Remove="Mastercard_Controlcenter.jpg" />
+    <None Remove="medium.jpg" />
+    <None Remove="normal.jpg" />
+    <None Remove="ok-icon.jpg" />
+    <None Remove="ok.jpg" />
+    <None Remove="packages-la-gi-1.jpg" />
+    <None Remove="packege.jpg" />
+    <None Remove="packegelist.png" />
+    <None Remove="relation-client-.png" />
+    <None Remove="return.png" />
+    <None Remove="Velodyne_Drone_920.jpg" />
+    <None Remove="‏‏BaseStationView - עותק.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ccr.MaterialDesign" Version="3.0.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.MaterialDesign" Version="4.11.0" />
+    <PackageReference Include="Mapsui" Version="3.0.2" />
+    <PackageReference Include="Mapsui.Wpf" Version="3.0.2" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="ScottPlot.WPF" Version="4.1.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="36914617-3d-delivery-drone-with-a-package-on-white-background.jpg" />
+    <Resource Include="5-challenges-that-the-drone-1.jpg" />
+    <Resource Include="Amazon-Drone.jpg" />
+    <Resource Include="base drone.jpg" />
+    <Resource Include="base station list.jfif" />
+    <Resource Include="baseImaege.png" />
+    <Resource Include="BaseStationView.jpg" />
+    <Resource Include="clienticon.png" />
+    <Resource Include="clientList.jpg" />
+    <Resource Include="clientlist1.png" />
+    <Resource Include="clientview.jpg" />
+    <Resource Include="clientview.png" />
+    <Resource Include="depositphotos_70711715-stock-photo-quadrocopter-drone-delivering-package.jpg" />
+    <Resource Include="drone-delivery-concept-model-package-box-blue-background-d-design-illustration-hd-image-concept-delivery-quadcopter-157633516.jpg" />
+    <Resource Include="Drone-Delivery.jpg" />
+    <Resource Include="Drone-Delivery.png" />
+    <Resource Include="droneDelivery.jpg" />
+    <Resource Include="DroneIcon.png" />
+    <Resource Include="drones.jpg" />
+    <Resource Include="easy.jpg" />
+    <Resource Include="heavy.jpg" />
+    <Resource Include="img_art.png" />
+    <Resource Include="louis-michel-lebeau-deli-04.jpg" />
+    <Resource Include="Manager-icon.png" />
+    <Resource Include="Mastercard_Controlcenter.jpg" />
+    <Resource Include="medium.jpg" />
+    <Resource Include="normal.jpg" />
+    <Resource Include="ok-icon.jpg" />
+    <Resource Include="ok.jpg" />
+    <Resource Include="packages-la-gi-1.jpg" />
+    <Resource Include="packege.jpg" />
+    <Resource Include="packegelist.png" />
+    <Resource Include="relation-client-.png" />
+    <Resource Include="return.png" />
+    <Resource Include="Velodyne_Drone_920.jpg" />
+    <Resource Include="‏‏BaseStationView - עותק.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.7" />
+  </ItemGroup>
+
+</Project>
